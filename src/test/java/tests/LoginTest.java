@@ -5,6 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.Credentials;
+import pages.DashboardPage;
+import pages.ManageDashboardPage;
 
 public class LoginTest extends BaseTest {
 
@@ -25,6 +27,19 @@ public class LoginTest extends BaseTest {
         Assert.assertFalse(
                 loginPage.isLoginButtonDisplayed(),
                 "Login failed. Login page is still displayed."
+        );
+
+        DashboardPage dashboardPage =
+                new DashboardPage(driver);
+
+        dashboardPage.openManageDashboards();
+
+        ManageDashboardPage manageDashboardPage =
+                new ManageDashboardPage(driver);
+
+        Assert.assertTrue(
+                manageDashboardPage.isManageDashboardsPageDisplayed(),
+                "Manage Dashboards page was not displayed"
         );
     }
 }

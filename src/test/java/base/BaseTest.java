@@ -10,6 +10,28 @@ public class BaseTest {
 
     protected WebDriver driver;
 
+    protected void pause() {
+
+        int seconds =
+                Integer.parseInt(
+                        ConfigReader.get("actionDelay")
+                );
+
+        try {
+
+            Thread.sleep(seconds * 1000L);
+
+        } catch (InterruptedException e) {
+
+            Thread.currentThread().interrupt();
+
+            throw new RuntimeException(
+                    "Test execution was interrupted during visual delay",
+                    e
+            );
+        }
+    }
+
     @BeforeMethod
     public void setUp() {
 
