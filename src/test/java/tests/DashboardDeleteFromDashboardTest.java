@@ -3,8 +3,6 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.ManageDashboardPage;
 
 public class DashboardDeleteFromDashboardTest extends BaseTest {
 
@@ -12,15 +10,9 @@ public class DashboardDeleteFromDashboardTest extends BaseTest {
     public void deleteDashboardFromOpenedDashboardSuccessfully() {
 
         // Open Manage Dashboards
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
-
         dashboardPage.openManageDashboards();
 
         // Verify Manage Dashboards page
-        ManageDashboardPage manageDashboardPage =
-                new ManageDashboardPage(driver);
-
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
                 "Manage Dashboards page was not displayed"
@@ -49,25 +41,22 @@ public class DashboardDeleteFromDashboardTest extends BaseTest {
         manageDashboardPage.clickSubmit();
 
         // Verify that the temporary dashboard opened
-        DashboardPage createdDashboardPage =
-                new DashboardPage(driver);
-
         Assert.assertEquals(
-                createdDashboardPage.getCurrentDashboardName(),
+                dashboardPage.getCurrentDashboardName(),
                 dashboardName,
                 "Temporary dashboard was not created successfully"
         );
 
         // Open Dashboard Actions
-        createdDashboardPage.openDashboardActions();
+        dashboardPage.openDashboardActions();
 
-        createdDashboardPage.clickDeleteDashboard();
+        dashboardPage.clickDeleteDashboard();
 
-        createdDashboardPage.confirmDeleteDashboard();
+        dashboardPage.confirmDeleteDashboard();
 
-        createdDashboardPage.waitForDeleteSuccessNotificationToDisappear();
+        dashboardPage.waitForDeleteSuccessNotificationToDisappear();
 
-        createdDashboardPage.openManageDashboards();
+        dashboardPage.openManageDashboards();
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),

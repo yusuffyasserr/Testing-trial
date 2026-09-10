@@ -7,12 +7,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.DashboardPage;
 import pages.LoginPage;
+import pages.ManageDashboardPage;
 import utils.ConfigReader;
 import utils.Credentials;
 
 public class BaseTest {
 
     protected WebDriver driver;
+
+    protected LoginPage loginPage;
+    protected DashboardPage dashboardPage;
+    protected ManageDashboardPage manageDashboardPage;
 
     public WebDriver getDriver() {
         return driver;
@@ -44,6 +49,10 @@ public class BaseTest {
     public void setUpBrowser() {
 
         driver = DriverFactory.createDriver();
+
+        loginPage = new LoginPage(driver);
+        dashboardPage = new DashboardPage(driver);
+        manageDashboardPage = new ManageDashboardPage(driver);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -51,16 +60,10 @@ public class BaseTest {
 
         driver.get(ConfigReader.get("baseUrl"));
 
-        LoginPage loginPage =
-                new LoginPage(driver);
-
         loginPage.login(
                 Credentials.getUsername(),
                 Credentials.getPassword()
         );
-
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
 
         dashboardPage.waitForDashboardToLoad();
     }

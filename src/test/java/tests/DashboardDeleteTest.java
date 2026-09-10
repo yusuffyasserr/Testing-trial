@@ -3,8 +3,6 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.ManageDashboardPage;
 
 public class DashboardDeleteTest extends BaseTest {
 
@@ -12,15 +10,9 @@ public class DashboardDeleteTest extends BaseTest {
     public void deleteDashboardSuccessfully() {
 
         // 2. Open Manage Dashboards
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
-
         dashboardPage.openManageDashboards();
 
 
-
-        ManageDashboardPage manageDashboardPage =
-                new ManageDashboardPage(driver);
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
@@ -60,11 +52,8 @@ public class DashboardDeleteTest extends BaseTest {
         System.out.println("STEP 1: Dashboard submitted");
 
         // Verify temporary dashboard was created
-        DashboardPage createdDashboardPage =
-                new DashboardPage(driver);
-
         Assert.assertEquals(
-                createdDashboardPage.getCurrentDashboardName(),
+                dashboardPage.getCurrentDashboardName(),
                 dashboardName,
                 "Temporary dashboard was not created successfully"
         );
@@ -75,7 +64,7 @@ public class DashboardDeleteTest extends BaseTest {
 
         System.out.println("STEP 3: Opening Manage Dashboards");
 
-        createdDashboardPage.openManageDashboards();
+        dashboardPage.openManageDashboards();
 
         System.out.println("STEP 4: Manage Dashboards button clicked");
 

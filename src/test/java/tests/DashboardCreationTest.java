@@ -3,21 +3,13 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.ManageDashboardPage;
 
 public class DashboardCreationTest extends BaseTest {
 
     @Test(groups = {"regression"})
     public void openNewDashboardFormSuccessfully() throws InterruptedException {
 
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
-
         dashboardPage.openManageDashboards();
-
-        ManageDashboardPage manageDashboardPage =
-                new ManageDashboardPage(driver);
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
@@ -44,11 +36,8 @@ public class DashboardCreationTest extends BaseTest {
 
         manageDashboardPage.clickSubmit();
 
-        DashboardPage createdDashboardPage =
-                new DashboardPage(driver);
-
         String actualDashboardName =
-                createdDashboardPage.getCurrentDashboardName();
+                dashboardPage.getCurrentDashboardName();
 
         Assert.assertEquals(
                 actualDashboardName,

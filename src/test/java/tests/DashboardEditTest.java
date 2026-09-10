@@ -3,8 +3,6 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.ManageDashboardPage;
 
 public class DashboardEditTest extends BaseTest {
 
@@ -15,15 +13,9 @@ public class DashboardEditTest extends BaseTest {
         // 2. Open Manage Dashboards
         // =========================================
 
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
-
         dashboardPage.openManageDashboards();
 
 
-
-        ManageDashboardPage manageDashboardPage =
-                new ManageDashboardPage(driver);
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
@@ -78,11 +70,8 @@ public class DashboardEditTest extends BaseTest {
         // 5. Verify temporary dashboard was created
         // =========================================
 
-        DashboardPage createdDashboardPage =
-                new DashboardPage(driver);
-
         Assert.assertEquals(
-                createdDashboardPage.getCurrentDashboardName(),
+                dashboardPage.getCurrentDashboardName(),
                 dashboardName,
                 "Temporary dashboard was not created successfully"
         );
@@ -94,7 +83,7 @@ public class DashboardEditTest extends BaseTest {
         // 6. Open Dashboard Actions menu
         // =========================================
 
-        createdDashboardPage.openDashboardActions();
+        dashboardPage.openDashboardActions();
 
 
 
@@ -103,7 +92,7 @@ public class DashboardEditTest extends BaseTest {
         // 7. Click Edit Dashboard
         // =========================================
 
-        createdDashboardPage.clickEditDashboard();
+        dashboardPage.clickEditDashboard();
 
 
 
@@ -166,15 +155,11 @@ public class DashboardEditTest extends BaseTest {
         // 13. Verify dashboard name was updated
         // =========================================
 
-        DashboardPage editedDashboardPage =
-                new DashboardPage(driver);
-
         Assert.assertEquals(
-                editedDashboardPage.getCurrentDashboardName(),
+                dashboardPage.getCurrentDashboardName(),
                 updatedDashboardName,
                 "Dashboard name was not updated successfully"
         );
-
 
     }
 }

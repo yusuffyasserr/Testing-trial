@@ -3,8 +3,6 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.ManageDashboardPage;
 
 public class DashboardCloneTest extends BaseTest {
 
@@ -12,16 +10,10 @@ public class DashboardCloneTest extends BaseTest {
     public void cloneDashboardSuccessfully() {
 
         // Open Manage Dashboards
-        DashboardPage dashboardPage =
-                new DashboardPage(driver);
-
         dashboardPage.openManageDashboards();
 
 
 
-
-        ManageDashboardPage manageDashboardPage =
-                new ManageDashboardPage(driver);
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
@@ -64,11 +56,8 @@ public class DashboardCloneTest extends BaseTest {
 
 
         // Verify temporary dashboard was created
-        DashboardPage createdDashboardPage =
-                new DashboardPage(driver);
-
         Assert.assertEquals(
-                createdDashboardPage.getCurrentDashboardName(),
+                dashboardPage.getCurrentDashboardName(),
                 dashboardName,
                 "Temporary dashboard was not created successfully"
         );
@@ -77,18 +66,18 @@ public class DashboardCloneTest extends BaseTest {
 
 
         // Open Dashboard Actions
-        createdDashboardPage.openDashboardActions();
+        dashboardPage.openDashboardActions();
 
 
 
 
         // Click Clone Dashboard
-        createdDashboardPage.clickCloneDashboard();
+        dashboardPage.clickCloneDashboard();
 
 
         // Verify clone success notification appeared,
         // then wait until it disappears
-        createdDashboardPage
+        dashboardPage
                 .waitForCloneSuccessNotificationToDisappear();
 
 
