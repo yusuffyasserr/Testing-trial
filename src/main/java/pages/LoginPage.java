@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
@@ -28,7 +29,9 @@ public class LoginPage {
         this.wait =
                 new WebDriverWait(
                         driver,
-                        Duration.ofSeconds(15)
+                        Duration.ofSeconds(
+                                Long.parseLong(ConfigReader.get("timeout"))
+                        )
                 );
     }
 
@@ -70,10 +73,19 @@ public class LoginPage {
 
     public boolean isLoginPageDisplayed() {
 
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        usernameField
-                )
-        ).isDisplayed();
+        try {
+
+            wait.until(
+                    ExpectedConditions.invisibilityOfElementLocated(
+                            usernameField
+                    )
+            );
+
+            return false;
+
+        } catch (org.openqa.selenium.TimeoutException e) {
+
+            return true;
+        }
     }
 }

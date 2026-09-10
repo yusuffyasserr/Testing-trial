@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Keys;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
@@ -60,7 +61,9 @@ public class ManageDashboardPage {
 
         this.wait = new WebDriverWait(
                 driver,
-                Duration.ofSeconds(15)
+                Duration.ofSeconds(
+                        Long.parseLong(ConfigReader.get("timeout"))
+                )
         );
     }
 
