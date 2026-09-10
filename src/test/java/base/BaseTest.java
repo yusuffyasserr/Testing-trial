@@ -14,6 +14,10 @@ public class BaseTest {
 
     protected WebDriver driver;
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     protected void pause() {
 
         int seconds =

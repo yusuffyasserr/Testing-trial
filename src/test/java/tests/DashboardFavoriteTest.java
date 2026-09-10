@@ -8,6 +8,7 @@ import pages.ManageDashboardPage;
 
 public class DashboardFavoriteTest extends BaseTest {
 
+
     @Test(groups = {"regression"})
     public void favoriteAndUnfavoriteDashboardSuccessfully() {
 
