@@ -4,25 +4,12 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
-import pages.LoginPage;
 import pages.ManageDashboardPage;
-import utils.Credentials;
 
 public class DashboardDeleteTest extends BaseTest {
 
     @Test(groups = {"regression"})
     public void deleteDashboardSuccessfully() {
-
-        // 1. Login
-        LoginPage loginPage =
-                new LoginPage(driver);
-
-        loginPage.login(
-                Credentials.getUsername(),
-                Credentials.getPassword()
-        );
-
-        pause();
 
         // 2. Open Manage Dashboards
         DashboardPage dashboardPage =

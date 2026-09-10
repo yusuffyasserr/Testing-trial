@@ -2,9 +2,13 @@ package base;
 
 import factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.DashboardPage;
+import pages.LoginPage;
 import utils.ConfigReader;
+import utils.Credentials;
 
 public class BaseTest {
 
@@ -32,16 +36,33 @@ public class BaseTest {
         }
     }
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass(alwaysRun = true)
+    public void setUpBrowser() {
 
         driver = DriverFactory.createDriver();
-
-        driver.get(ConfigReader.get("baseUrl"));
     }
 
-    @AfterMethod
-    public void tearDown() {
+    @BeforeMethod(alwaysRun = true)
+    public void login() {
+
+        driver.get(ConfigReader.get("baseUrl"));
+
+        LoginPage loginPage =
+                new LoginPage(driver);
+
+        loginPage.login(
+                Credentials.getUsername(),
+                Credentials.getPassword()
+        );
+
+        DashboardPage dashboardPage =
+                new DashboardPage(driver);
+
+        dashboardPage.waitForDashboardToLoad();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownBrowser() {
 
         if (driver != null) {
             driver.quit();

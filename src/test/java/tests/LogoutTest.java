@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
-import utils.Credentials;
 
 public class LogoutTest extends BaseTest {
 
@@ -13,22 +12,7 @@ public class LogoutTest extends BaseTest {
     public void logoutSuccessfully() {
 
         // =========================================
-        // 1. Login
-        // =========================================
-
-        LoginPage loginPage =
-                new LoginPage(driver);
-
-        loginPage.login(
-                Credentials.getUsername(),
-                Credentials.getPassword()
-        );
-
-        pause();
-
-
-        // =========================================
-        // 2. Open user menu
+        // 1. Open user menu
         // =========================================
 
         DashboardPage dashboardPage =
@@ -40,7 +24,7 @@ public class LogoutTest extends BaseTest {
 
 
         // =========================================
-        // 3. Click Logout
+        // 2. Click Logout
         // =========================================
 
         dashboardPage.clickLogout();
@@ -49,8 +33,11 @@ public class LogoutTest extends BaseTest {
 
 
         // =========================================
-        // 4. Verify Login page is displayed again
+        // 3. Verify Login page is displayed again
         // =========================================
+
+        LoginPage loginPage =
+                new LoginPage(driver);
 
         Assert.assertTrue(
                 loginPage.isLoginPageDisplayed(),

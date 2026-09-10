@@ -100,6 +100,15 @@ public class DashboardPage {
         ).click();
     }
 
+    public void waitForDashboardToLoad() {
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        manageDashboardButton
+                )
+        );
+    }
+
     public String getCurrentDashboardName() {
 
         return wait.until(
