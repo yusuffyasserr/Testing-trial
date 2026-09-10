@@ -17,7 +17,7 @@ public class DashboardCloneTest extends BaseTest {
 
         dashboardPage.openManageDashboards();
 
-        pause();
+
 
 
         ManageDashboardPage manageDashboardPage =
@@ -28,13 +28,13 @@ public class DashboardCloneTest extends BaseTest {
                 "Manage Dashboards page was not displayed"
         );
 
-        pause();
+
 
 
         // Open New Dashboard form
         manageDashboardPage.openNewDashboardForm();
 
-        pause();
+
 
         Assert.assertTrue(
                 manageDashboardPage.isNewDashboardFormDisplayed(),
@@ -50,17 +50,17 @@ public class DashboardCloneTest extends BaseTest {
                 dashboardName
         );
 
-        pause();
+
 
         manageDashboardPage.enterDashboardDescription(
                 "Temporary dashboard for clone regression test"
         );
 
-        pause();
+
 
         manageDashboardPage.clickSubmit();
 
-        pause();
+
 
 
         // Verify temporary dashboard was created
@@ -73,13 +73,13 @@ public class DashboardCloneTest extends BaseTest {
                 "Temporary dashboard was not created successfully"
         );
 
-        pause();
+
 
 
         // Open Dashboard Actions
         createdDashboardPage.openDashboardActions();
 
-        pause();
+
 
 
         // Click Clone Dashboard
@@ -91,6 +91,6 @@ public class DashboardCloneTest extends BaseTest {
         createdDashboardPage
                 .waitForCloneSuccessNotificationToDisappear();
 
-        pause();
+
     }
 }

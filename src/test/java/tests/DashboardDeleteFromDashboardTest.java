@@ -8,7 +8,7 @@ import pages.ManageDashboardPage;
 
 public class DashboardDeleteFromDashboardTest extends BaseTest {
 
-    @Test(groups = {"alternative"})
+    @Test(groups = {"regression"})
     public void deleteDashboardFromOpenedDashboardSuccessfully() {
 
         // Open Manage Dashboards

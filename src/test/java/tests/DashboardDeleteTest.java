@@ -8,7 +8,7 @@ import pages.ManageDashboardPage;
 
 public class DashboardDeleteTest extends BaseTest {
 
-    @Test(groups = {"regression"})
+    @Test(groups = {"alternative"})
     public void deleteDashboardSuccessfully() {
 
         // 2. Open Manage Dashboards
@@ -17,7 +17,7 @@ public class DashboardDeleteTest extends BaseTest {
 
         dashboardPage.openManageDashboards();
 
-        pause();
+
 
         ManageDashboardPage manageDashboardPage =
                 new ManageDashboardPage(driver);
@@ -30,7 +30,7 @@ public class DashboardDeleteTest extends BaseTest {
         // 3. Open New Dashboard form
         manageDashboardPage.openNewDashboardForm();
 
-        pause();
+
 
         Assert.assertTrue(
                 manageDashboardPage.isNewDashboardFormDisplayed(),
@@ -45,17 +45,17 @@ public class DashboardDeleteTest extends BaseTest {
                 dashboardName
         );
 
-        pause();
+
 
         manageDashboardPage.enterDashboardDescription(
                 "Temporary dashboard created for delete regression test"
         );
 
-        pause();
+
 
         manageDashboardPage.clickSubmit();
 
-        pause();
+
 
         System.out.println("STEP 1: Dashboard submitted");
 
@@ -71,7 +71,7 @@ public class DashboardDeleteTest extends BaseTest {
 
         System.out.println("STEP 2: Temporary dashboard verified");
 
-        pause();
+
 
         System.out.println("STEP 3: Opening Manage Dashboards");
 
@@ -79,7 +79,7 @@ public class DashboardDeleteTest extends BaseTest {
 
         System.out.println("STEP 4: Manage Dashboards button clicked");
 
-        pause();
+
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
@@ -88,20 +88,20 @@ public class DashboardDeleteTest extends BaseTest {
 
         System.out.println("STEP 5: Manage Dashboards page verified");
 
-        pause();
+
 
         manageDashboardPage.searchDashboard(
                 dashboardName
         );
 
         System.out.println("STEP 6: Dashboard searched");
-        pause();
+
 
         manageDashboardPage.clickDeleteDashboard();
-        pause();
+
         manageDashboardPage.confirmDelete();
         System.out.println("STEP 7: Dashboard deleted successfully");
-        pause();
+
 
         Assert.assertTrue(
                 manageDashboardPage.isNoDataMessageDisplayed(),

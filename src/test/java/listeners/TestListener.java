@@ -7,6 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utils.ScreenshotUtils;
+import io.qameta.allure.Allure;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class TestListener implements ITestListener {
 
@@ -30,6 +35,7 @@ public class TestListener implements ITestListener {
                 result.getName()
         );
     }
+
 
     @Override
     public void onTestFailure(ITestResult result) {
@@ -67,6 +73,31 @@ public class TestListener implements ITestListener {
                         "SCREENSHOT SAVED: {}",
                         screenshotPath
                 );
+
+                try (InputStream screenshot =
+                             Files.newInputStream(
+                                     Path.of(screenshotPath)
+                             )) {
+
+                    Allure.addAttachment(
+                            "Failure Screenshot",
+                            "image/png",
+                            screenshot,
+                            ".png"
+                    );
+
+                    logger.info(
+                            "SCREENSHOT ATTACHED TO ALLURE: {}",
+                            result.getName()
+                    );
+
+                } catch (IOException e) {
+
+                    logger.error(
+                            "FAILED TO ATTACH SCREENSHOT TO ALLURE",
+                            e
+                    );
+                }
             }
         }
     }

@@ -20,7 +20,6 @@ public class DashboardEditTest extends BaseTest {
 
         dashboardPage.openManageDashboards();
 
-        pause();
 
 
         ManageDashboardPage manageDashboardPage =
@@ -31,7 +30,7 @@ public class DashboardEditTest extends BaseTest {
                 "Manage Dashboards page was not displayed"
         );
 
-        pause();
+
 
 
         // =========================================
@@ -40,7 +39,7 @@ public class DashboardEditTest extends BaseTest {
 
         manageDashboardPage.openNewDashboardForm();
 
-        pause();
+
 
         Assert.assertTrue(
                 manageDashboardPage.isNewDashboardFormDisplayed(),
@@ -62,17 +61,17 @@ public class DashboardEditTest extends BaseTest {
                 dashboardName
         );
 
-        pause();
+
 
         manageDashboardPage.enterDashboardDescription(
                 dashboardDescription
         );
 
-        pause();
+
 
         manageDashboardPage.clickSubmit();
 
-        pause();
+
 
 
         // =========================================
@@ -88,7 +87,7 @@ public class DashboardEditTest extends BaseTest {
                 "Temporary dashboard was not created successfully"
         );
 
-        pause();
+
 
 
         // =========================================
@@ -97,7 +96,7 @@ public class DashboardEditTest extends BaseTest {
 
         createdDashboardPage.openDashboardActions();
 
-        pause();
+
 
 
         // =========================================
@@ -106,7 +105,7 @@ public class DashboardEditTest extends BaseTest {
 
         createdDashboardPage.clickEditDashboard();
 
-        pause();
+
 
 
         // =========================================
@@ -118,7 +117,7 @@ public class DashboardEditTest extends BaseTest {
                 "Edit Dashboard form was not displayed"
         );
 
-        pause();
+
 
 
         // =========================================
@@ -140,7 +139,7 @@ public class DashboardEditTest extends BaseTest {
                 updatedDashboardName
         );
 
-        pause();
+
 
 
         // =========================================
@@ -151,7 +150,7 @@ public class DashboardEditTest extends BaseTest {
                 updatedDescription
         );
 
-        pause();
+
 
 
         // =========================================
@@ -160,7 +159,7 @@ public class DashboardEditTest extends BaseTest {
 
         manageDashboardPage.clickSubmit();
 
-        pause();
+
 
 
         // =========================================
@@ -176,6 +175,6 @@ public class DashboardEditTest extends BaseTest {
                 "Dashboard name was not updated successfully"
         );
 
-        pause();
+
     }
 }
