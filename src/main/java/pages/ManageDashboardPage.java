@@ -49,6 +49,11 @@ public class ManageDashboardPage {
     private final By noDataMessage =
             By.xpath("//*[normalize-space()='No data available in table']");
 
+    private final By editDashboardTitle =
+            By.xpath(
+                    "//h6[@class='title-text' and normalize-space()='Edit Dashboard']"
+            );
+
     public ManageDashboardPage(WebDriver driver) {
 
         this.driver = driver;
@@ -97,20 +102,26 @@ public class ManageDashboardPage {
 
     public void enterDashboardName(String dashboardName) {
 
-        wait.until(
+        var nameField = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         dashboardNameField
                 )
-        ).sendKeys(dashboardName);
+        );
+
+        nameField.clear();
+        nameField.sendKeys(dashboardName);
     }
 
     public void enterDashboardDescription(String description) {
 
-        wait.until(
+        var descriptionField = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         dashboardDescriptionField
                 )
-        ).sendKeys(description);
+        );
+
+        descriptionField.clear();
+        descriptionField.sendKeys(description);
     }
 
     public void clickSubmit() {
@@ -170,4 +181,56 @@ public class ManageDashboardPage {
 
         selectDashboardOption();
     }
+
+
+    public boolean isEditDashboardFormDisplayed() {
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        editDashboardTitle
+                )
+        ).isDisplayed();
+    }
+
+    public void replaceDashboardName(String newDashboardName) {
+
+        var nameField = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        dashboardNameField
+                )
+        );
+
+        nameField.click();
+
+        nameField.sendKeys(
+                Keys.CONTROL,
+                "a"
+        );
+
+        nameField.sendKeys(Keys.BACK_SPACE);
+
+        nameField.sendKeys(newDashboardName);
+    }
+
+    public void replaceDashboardDescription(String newDescription) {
+
+        var descriptionField = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        dashboardDescriptionField
+                )
+        );
+
+        descriptionField.click();
+
+        descriptionField.sendKeys(
+                Keys.CONTROL,
+                "a"
+        );
+
+        descriptionField.sendKeys(Keys.BACK_SPACE);
+
+        descriptionField.sendKeys(newDescription);
+    }
+
+
 }

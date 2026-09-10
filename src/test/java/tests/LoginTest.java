@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest {
         Thread.sleep(3000);
 
         Assert.assertFalse(
-                loginPage.isLoginButtonDisplayed(),
+                loginPage.isLoginPageDisplayed(),
                 "Login failed. Login page is still displayed."
         );
 

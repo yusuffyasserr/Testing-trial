@@ -36,11 +36,46 @@ public class DashboardPage {
                             "button[data-bb-handler='confirm']"
             );
 
+    private final By editDashboardOption =
+            By.id("editDesignSpace");
+
 
     private final By deleteSuccessNotification =
             By.xpath(
                     "//div[contains(@class,'notification-success')" +
                             " and .//h4[normalize-space()='Delete Dashboard']]"
+            );
+
+    private final By cloneDashboardOption =
+            By.id("cloneDesignSpace");
+
+    private final By cloneSuccessNotification =
+            By.xpath(
+                    "//div[contains(@class,'notification-success')" +
+                            " and .//h4[normalize-space()='Clone Dashboard']]"
+            );
+
+    private final By favoriteButton =
+            By.cssSelector(
+                    "button[tooltip='Favorite / Unfavorite']"
+            );
+
+    private final By unfavoriteState =
+            By.cssSelector(
+                    "button[tooltip='Favorite / Unfavorite'] i.ev-star-o"
+            );
+
+    private final By favoriteState =
+            By.cssSelector(
+                    "button[tooltip='Favorite / Unfavorite'] i.ev-star.ev-text-warning"
+            );
+
+    private final By userMenu =
+            By.id("logout");
+
+    private final By logoutOption =
+            By.cssSelector(
+                    "ul[aria-labelledby='logout'] a[href='logout']"
             );
 
     public DashboardPage(WebDriver driver) {
@@ -124,4 +159,82 @@ public class DashboardPage {
                 )
         );
     }
+
+    public void clickEditDashboard() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        editDashboardOption
+                )
+        ).click();
+    }
+
+    public void clickCloneDashboard() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        cloneDashboardOption
+                )
+        ).click();
+    }
+
+    public void waitForCloneSuccessNotificationToDisappear() {
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        cloneSuccessNotification
+                )
+        );
+
+        wait.until(
+                ExpectedConditions.invisibilityOfElementLocated(
+                        cloneSuccessNotification
+                )
+        );
+    }
+
+    //Favourite/Unfavourite Feature
+    public void clickFavoriteButton() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        favoriteButton
+                )
+        ).click();
+    }
+    public boolean isDashboardFavorite() {
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        favoriteState
+                )
+        ).isDisplayed();
+    }
+    public boolean isDashboardUnfavorite() {
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        unfavoriteState
+                )
+        ).isDisplayed();
+    }
+
+    // for logout
+    public void openUserMenu() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        userMenu
+                )
+        ).click();
+    }
+    public void clickLogout() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        logoutOption
+                )
+        ).click();
+    }
+
 }

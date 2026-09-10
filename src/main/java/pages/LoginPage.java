@@ -68,8 +68,12 @@ public class LoginPage {
         clickLogin();
     }
 
-    public boolean isLoginButtonDisplayed() {
+    public boolean isLoginPageDisplayed() {
 
-        return !driver.findElements(loginButton).isEmpty();
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        usernameField
+                )
+        ).isDisplayed();
     }
 }
