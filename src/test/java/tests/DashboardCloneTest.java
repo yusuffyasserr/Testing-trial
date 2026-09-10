@@ -4,46 +4,82 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DashboardCreationTest extends BaseTest {
+public class DashboardCloneTest extends BaseTest {
 
     @Test(groups = {"regression"})
-    public void openNewDashboardFormSuccessfully() throws InterruptedException {
+    public void cloneDashboardSuccessfully() {
 
+        // Open Manage Dashboards
         dashboardPage.openManageDashboards();
+
+
+
 
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
                 "Manage Dashboards page was not displayed"
         );
 
+
+
+
+        // Open New Dashboard form
         manageDashboardPage.openNewDashboardForm();
+
+
 
         Assert.assertTrue(
                 manageDashboardPage.isNewDashboardFormDisplayed(),
                 "New Dashboard form was not displayed"
         );
 
+
+        // Create temporary dashboard
         String dashboardName =
-                "AutoDashboard_" + System.currentTimeMillis();
+                "CloneTest_" + System.currentTimeMillis();
 
         manageDashboardPage.enterDashboardName(
                 dashboardName
         );
 
+
+
         manageDashboardPage.enterDashboardDescription(
-                "Dashboard for automation"
+                "Temporary dashboard for clone regression test"
         );
+
+
 
         manageDashboardPage.clickSubmit();
 
-        String actualDashboardName =
-                dashboardPage.getCurrentDashboardName();
 
+
+
+        // Verify temporary dashboard was created
         Assert.assertEquals(
-                actualDashboardName,
+                dashboardPage.getCurrentDashboardName(),
                 dashboardName,
-                "Created dashboard name does not match the expected dashboard name"
+                "Temporary dashboard was not created successfully"
         );
+
+
+
+
+        // Open Dashboard Actions
+        dashboardPage.openDashboardActions();
+
+
+
+
+        // Click Clone Dashboard
+        dashboardPage.clickCloneDashboard();
+
+
+        // Verify clone success notification appeared,
+        // then wait until it disappears
+        dashboardPage
+                .waitForCloneSuccessNotificationToDisappear();
+
 
     }
 }

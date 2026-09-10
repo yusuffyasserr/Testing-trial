@@ -4,97 +4,74 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DashboardDeleteTest extends BaseTest {
+public class DashboardDeleteFromDashboardTest extends BaseTest {
 
-    @Test(groups = {"alternative"})
-    public void deleteDashboardSuccessfully() {
+    @Test(groups = {"regression"})
+    public void deleteDashboardFromOpenedDashboardSuccessfully() {
 
-        // 2. Open Manage Dashboards
+        // Open Manage Dashboards
         dashboardPage.openManageDashboards();
 
-
-
+        // Verify Manage Dashboards page
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
                 "Manage Dashboards page was not displayed"
         );
 
-        // 3. Open New Dashboard form
+        // Open New Dashboard form
         manageDashboardPage.openNewDashboardForm();
-
-
 
         Assert.assertTrue(
                 manageDashboardPage.isNewDashboardFormDisplayed(),
                 "New Dashboard form was not displayed"
         );
 
-        // 4. Create temporary dashboard
+        // Create unique temporary dashboard
         String dashboardName =
-                "DeleteTest_" + System.currentTimeMillis();
+                "DeleteFromDashboard_" + System.currentTimeMillis();
 
         manageDashboardPage.enterDashboardName(
                 dashboardName
         );
 
-
-
         manageDashboardPage.enterDashboardDescription(
-                "Temporary dashboard created for delete regression test"
+                "Temporary dashboard for delete-from-dashboard regression test"
         );
-
-
 
         manageDashboardPage.clickSubmit();
 
-
-
-        System.out.println("STEP 1: Dashboard submitted");
-
-        // Verify temporary dashboard was created
+        // Verify that the temporary dashboard opened
         Assert.assertEquals(
                 dashboardPage.getCurrentDashboardName(),
                 dashboardName,
                 "Temporary dashboard was not created successfully"
         );
 
-        System.out.println("STEP 2: Temporary dashboard verified");
+        // Open Dashboard Actions
+        dashboardPage.openDashboardActions();
 
+        dashboardPage.clickDeleteDashboard();
 
+        dashboardPage.confirmDeleteDashboard();
 
-        System.out.println("STEP 3: Opening Manage Dashboards");
+        dashboardPage.waitForDeleteSuccessNotificationToDisappear();
 
         dashboardPage.openManageDashboards();
 
-        System.out.println("STEP 4: Manage Dashboards button clicked");
-
-
-
         Assert.assertTrue(
                 manageDashboardPage.isManageDashboardsPageDisplayed(),
-                "Manage Dashboards page was not displayed"
+                "Manage Dashboards page was not displayed after deletion"
         );
 
-        System.out.println("STEP 5: Manage Dashboards page verified");
-
-
-
+        // Search for the deleted dashboard
         manageDashboardPage.searchDashboard(
                 dashboardName
         );
 
-        System.out.println("STEP 6: Dashboard searched");
-
-
-        manageDashboardPage.clickDeleteDashboard();
-
-        manageDashboardPage.confirmDelete();
-        System.out.println("STEP 7: Dashboard deleted successfully");
-
-
+        // Final verification
         Assert.assertTrue(
                 manageDashboardPage.isNoDataMessageDisplayed(),
-                "Deleted dashboard is still displayed in the search results"
+                "Dashboard still exists after deleting it from the Dashboard page"
         );
     }
 }

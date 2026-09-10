@@ -2,13 +2,26 @@ package base;
 
 import factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.DashboardPage;
+import pages.LoginPage;
+import pages.ManageDashboardPage;
 import utils.ConfigReader;
+import utils.Credentials;
 
 public class BaseTest {
 
     protected WebDriver driver;
+
+    protected LoginPage loginPage;
+    protected DashboardPage dashboardPage;
+    protected ManageDashboardPage manageDashboardPage;
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 
     protected void pause() {
 
@@ -32,16 +45,31 @@ public class BaseTest {
         }
     }
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass(alwaysRun = true)
+    public void setUpBrowser() {
 
         driver = DriverFactory.createDriver();
 
-        driver.get(ConfigReader.get("baseUrl"));
+        loginPage = new LoginPage(driver);
+        dashboardPage = new DashboardPage(driver);
+        manageDashboardPage = new ManageDashboardPage(driver);
     }
 
-    @AfterMethod
-    public void tearDown() {
+    @BeforeMethod(alwaysRun = true)
+    public void login() {
+
+        driver.get(ConfigReader.get("baseUrl"));
+
+        loginPage.login(
+                Credentials.getUsername(),
+                Credentials.getPassword()
+        );
+
+        dashboardPage.waitForDashboardToLoad();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownBrowser() {
 
         if (driver != null) {
             driver.quit();
